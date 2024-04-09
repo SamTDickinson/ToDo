@@ -1,5 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+
+from .models import Task
 
 
-def home(request):
-    return render(request, 'home-todo.html')
+def addTask(request):
+    task = request.POST['task']
+    Task.objects.create(task=task)
+    return redirect('home')
